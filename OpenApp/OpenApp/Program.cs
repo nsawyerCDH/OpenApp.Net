@@ -1,23 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
-using System.Diagnostics;
-using System.Windows.Forms;
-using System.Threading;
 using System.Runtime.InteropServices;
+using System.Threading;
+using System.Windows.Forms;
 
 namespace OpenApp
 {
     internal class Program
     {
+        /// <summary>
+        /// Accept 1 argument, which will be the directory to run against.  By default, it will run against the current directory the app is executing in.
+        /// </summary>
+        /// <param name="args">args[0] = directory to run against (Optional) (Default = Executing Directory)</param>
+        /// <exception cref="Exception"></exception>
         static void Main(string[] args)
         {
             string Dir = Environment.CurrentDirectory;
-            //Check is the args is empty.  If it is, then the program will run against it's current directory.
-            //If not, pull and validate the directory from args[0]
+
+            //Check if args directory is provided
             if (args != null && args.Length > 0 && args[0].Length > 0)
             {
                 if (Directory.Exists(args[0]))
@@ -47,22 +47,24 @@ namespace OpenApp
                 SendKeys.SendWait("{ENTER}");
             }
 
+            //Sleep for 1 second to allow the last file to open
+            Thread.Sleep(1000);
+
             //Set the file explorer window to the desktop
             OpenFolderAndSelectFile(Environment.GetFolderPath(Environment.SpecialFolder.Desktop));
 
+            //Display Completion Message and countdown to close the console window
             Console.WriteLine("Operation Complete!");
             for (int i = 10; i > 0; i--)
             {
-                Console.Write($"\rConsole will automatically close in {i}... ");
+                Console.Write("\r                                            ");
+                Console.Write($"\rConsole will automatically close in {i}...");
                 Thread.Sleep(1000);
             }
         }
 
         public static void OpenFolderAndSelectFile(string filePath)
         {
-            if (filePath == null)
-                throw new ArgumentNullException("filePath");
-
             IntPtr pidl = ILCreateFromPathW(filePath);
             SHOpenFolderAndSelectItems(pidl, 0, IntPtr.Zero, 0);
             ILFree(pidl);
