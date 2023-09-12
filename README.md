@@ -2,7 +2,7 @@
 
 **OpenApp.Net** is a simple application that opens applications on your behalf. The tool was developed to simplify the opening of multiple different applications as part of a specific workload.
 
-OpenApp.Net is built using .NET 4.8.1, and designed exclusively for Windows based Operating Systems.
+OpenApp.Net is built using .NET 4.8.1, has no external dependencies, and is designed exclusively for Windows based Operating Systems.
 
 To get started with OpenApp.Net, please follow these simple instructions:
 1. Create a new directory on your computer and generate shortcut (\*.lnk) files for all your desired applications into this directory.
