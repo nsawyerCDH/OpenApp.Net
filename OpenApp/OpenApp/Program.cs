@@ -1,5 +1,6 @@
-using System;
+﻿using System;
 using System.IO;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
@@ -15,6 +16,9 @@ namespace OpenApp
         /// <exception cref="Exception"></exception>
         static void Main(string[] args)
         {
+            Console.WriteLine($"OpenApp.Net v{Assembly.GetExecutingAssembly().GetName().Version}");
+            Console.WriteLine("");
+
             string Dir = Environment.CurrentDirectory;
 
             //Check if args directory is provided
