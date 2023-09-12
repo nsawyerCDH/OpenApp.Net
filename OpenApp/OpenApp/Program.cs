@@ -50,9 +50,6 @@ namespace OpenApp
             //Sleep for 1 second to allow the last file to open
             Thread.Sleep(1000);
 
-            //Set the file explorer window to the desktop
-            OpenFolderAndSelectFile(Environment.GetFolderPath(Environment.SpecialFolder.Desktop));
-
             //Display Completion Message and countdown to close the console window
             Console.WriteLine("Operation Complete!");
             for (int i = 10; i > 0; i--)
