@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
@@ -15,6 +16,9 @@ namespace OpenApp
         /// <exception cref="Exception"></exception>
         static void Main(string[] args)
         {
+            Console.WriteLine($"OpenApp.Net v{Assembly.GetExecutingAssembly().GetName().Version}");
+            Console.WriteLine("");
+
             string Dir = Environment.CurrentDirectory;
 
             //Check if args directory is provided
@@ -50,10 +54,8 @@ namespace OpenApp
             //Sleep for 1 second to allow the last file to open
             Thread.Sleep(1000);
 
-            //Set the file explorer window to the desktop
-            OpenFolderAndSelectFile(Environment.GetFolderPath(Environment.SpecialFolder.Desktop));
-
             //Display Completion Message and countdown to close the console window
+            Console.WriteLine("");
             Console.WriteLine("Operation Complete!");
             for (int i = 10; i > 0; i--)
             {
