@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading;
@@ -51,6 +51,7 @@ namespace OpenApp
             Thread.Sleep(1000);
 
             //Display Completion Message and countdown to close the console window
+            Console.WriteLine("");
             Console.WriteLine("Operation Complete!");
             for (int i = 10; i > 0; i--)
             {
