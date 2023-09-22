@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -74,8 +74,7 @@ namespace OpenApp
             Console.WriteLine("Operation Complete!");
             for (int i = 10; i > 0; i--)
             {
-                Console.Write("\r                                            ");
-                Console.Write($"\rConsole will automatically close in {i}...");
+                Console.Write($"\rConsole will automatically close in ({i.ToString().PadLeft(2)}) seconds...");
                 Thread.Sleep(1000);
             }
         }
