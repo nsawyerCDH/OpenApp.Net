@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -10,7 +10,7 @@ namespace OpenApp
     internal class Program
     {
         /// <summary>
-        /// Accept 1 argument, which will be the directory to run against.  By default, it will run against the current directory the app is executing in.
+        /// Accept 2 arguments, the directory to run against and the delay (Ms) between opening apps.  By default, it will run against the current directory the app is executing in, with 1000 ms delay between opening apps.
         /// </summary>
         /// <param name="args">args[0] = directory to run against (Optional) (Default = Executing Directory)</param>
         /// <exception cref="Exception"></exception>
@@ -35,11 +35,26 @@ namespace OpenApp
             }
             Console.WriteLine($"Operating on Directory: {Dir}");
 
+            //Check if args delay is provided
+            int Delay = 1000;
+            if (args != null && args.Length > 1 && args[1].Length > 0)
+            {
+                if (int.TryParse(args[1], out int result))
+                {
+                    Delay = result;
+                }
+                else
+                {
+                    throw new Exception("The Delay from Argument 1 is not a valid integer!");
+                }
+            }
+            Console.WriteLine($"Delay between opening apps: ({Delay / 1000}) seconds");
+
             //Iterate over all the files in the directory that are shortcut files
             foreach (string file in Directory.GetFiles(Dir, "*.lnk"))
             {
-                //Wait 1 seconds for the previous file to open
-                Thread.Sleep(1000);
+                //Delay for the previous file to open
+                Thread.Sleep(Delay);
 
                 //Write to the Console the name of the file
                 Console.WriteLine($"> Opening File: {Path.GetFileNameWithoutExtension(file)}");
@@ -51,8 +66,8 @@ namespace OpenApp
                 SendKeys.SendWait("{ENTER}");
             }
 
-            //Sleep for 1 second to allow the last file to open
-            Thread.Sleep(1000);
+            //Delay to allow the last file to open
+            Thread.Sleep(Delay);
 
             //Display Completion Message and countdown to close the console window
             Console.WriteLine("");
